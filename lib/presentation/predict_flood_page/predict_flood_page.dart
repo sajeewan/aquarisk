@@ -21,7 +21,7 @@ class PredictFloodPage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Container(
             width: double.maxFinite,
             decoration: AppDecoration.fillWhiteA,
@@ -50,10 +50,11 @@ class PredictFloodPage extends StatelessWidget {
                     ),
                   ),
                   hintText: "Select District",
-
                   items: controller
                       .predictFloodModelObj.value.dropdownItemList.value,
-
+                  onChanged: (value) {
+                    controller.onSelected(value);
+                  },
                 ),
                 SizedBox(height: 16.v),
                 Align(
@@ -101,7 +102,7 @@ class PredictFloodPage extends StatelessWidget {
     return CustomTextFormField(
       textInputType: TextInputType.number,
       controller: controller.waterLevelController,
-      hintText: "lbl_100_millilitre".tr,
+      hintText: "Eg:3.13".tr,
     );
   }
 
@@ -127,8 +128,8 @@ class PredictFloodPage extends StatelessWidget {
   /// Section Widget
   Widget _buildPredictNow() {
     return CustomElevatedButton(
-      text: "Eg:3.13".tr,
-      onPressed: (){
+      text: "Predict",
+      onPressed: () {
         controller.predictFlood();
       },
     );
