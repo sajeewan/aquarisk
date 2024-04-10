@@ -95,7 +95,10 @@ class CustomDropDown extends StatelessWidget {
           decoration: decoration,
           validator: validator,
           onChanged: (value) {
-            onChanged!(value!);
+            // Call the onChanged callback if provided
+            if (onChanged != null) {
+              onChanged!(value!);
+            }
           },
         ),
       );

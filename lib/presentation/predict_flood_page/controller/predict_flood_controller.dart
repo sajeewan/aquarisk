@@ -38,12 +38,12 @@ class PredictFloodController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    waterLevelController.dispose();
-    rainFallController.dispose();
-    temperatureController.dispose();
+    waterLevelController.clear();
+    rainFallController.clear();
+    temperatureController.clear();
   }
 
-  onSelected(dynamic value) {
+  onSelected(SelectionPopupModel value) {
     for (var element in predictFloodModelObj.value.dropdownItemList.value) {
       element.isSelected = false;
       if (element.id == value.id) {
