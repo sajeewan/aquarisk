@@ -1,3 +1,6 @@
+import 'package:aquarisk/presentation/home_page/widgets/list_item_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'widgets/home_item_widget.dart';
 import 'models/home_item_model.dart';
 import 'package:aquarisk/widgets/custom_text_form_field.dart';
@@ -14,43 +17,42 @@ class HomePage extends StatelessWidget {
         );
 
   HomeController controller = Get.put(HomeController(HomeModel().obs));
-
+  final Stream<QuerySnapshot> _predictionStream = FirebaseFirestore.instance.collection('prediction').snapshots();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text("Welcome"),
+          leading: null,
+
+
+        ),
         body: Container(
           width: double.maxFinite,
           decoration: AppDecoration.fillWhiteA,
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 29.h),
-                  child: Text(
-                    "lbl_nearest_shelter".tr,
-                    style: CustomTextStyles.titleMediumOnPrimary,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+
+                SizedBox(height: 7.v),
+                _buildHome(),
+                SizedBox(height: 45.v),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 29.h),
+                    child: Text(
+                      "msg_previous_predications".tr,
+                      style: CustomTextStyles.titleMediumOnPrimary,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 7.v),
-              _buildHome(),
-              SizedBox(height: 45.v),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 29.h),
-                  child: Text(
-                    "msg_previous_predications".tr,
-                    style: CustomTextStyles.titleMediumOnPrimary,
-                  ),
-                ),
-              ),
+                _buildPredictionList()
 
-
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -89,121 +91,46 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildPredictionCounter() {
-    return CustomTextFormField(
-      controller: controller.predictionCounterController,
-      hintText: "lbl_prediction_1".tr,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 5.v,
-      ),
-      borderDecoration: TextFormFieldStyleHelper.fillGray,
-      filled: true,
-      fillColor: appTheme.gray200,
-    );
-  }
+  Widget _buildPredictionList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _predictionStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
+        }
 
-  /// Section Widget
-  Widget _buildPredictionCounter1() {
-    return CustomTextFormField(
-      controller: controller.predictionCounterController1,
-      hintText: "lbl_prediction_2".tr,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 5.v,
-      ),
-      borderDecoration: TextFormFieldStyleHelper.fillGray,
-      filled: true,
-      fillColor: appTheme.gray200,
-    );
-  }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-  /// Section Widget
-  Widget _buildPredictionCounter2() {
-    return CustomTextFormField(
-      controller: controller.predictionCounterController2,
-      hintText: "lbl_prediction_3".tr,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 5.v,
-      ),
-      borderDecoration: TextFormFieldStyleHelper.fillGray,
-      filled: true,
-      fillColor: appTheme.gray200,
-    );
-  }
+        List<DocumentSnapshot> predictions = snapshot.data!.docs;
 
-  /// Section Widget
-  Widget _buildPredictionCounter3() {
-    return CustomTextFormField(
-      controller: controller.predictionCounterController3,
-      hintText: "lbl_prediction_4".tr,
-      textInputAction: TextInputAction.done,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 10.h,
-        vertical: 5.v,
-      ),
-      borderDecoration: TextFormFieldStyleHelper.fillGray,
-      filled: true,
-      fillColor: appTheme.gray200,
-    );
-  }
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: predictions.length,
+          itemBuilder: (context, index) {
+            Map<String, dynamic> data = predictions[index].data() as Map<String, dynamic>;
+            String district = data['District'] ?? '';
+            DateTime date = (data['Date'] as Timestamp).toDate();
+            bool isFlooded = data['Flood Prediction'] ?? false;
 
-  /// Section Widget
-  Widget _buildFrameEighty() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 29.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                _buildPredictionCounter(),
-                SizedBox(height: 11.v),
-                _buildPredictionCounter1(),
-                SizedBox(height: 11.v),
-                _buildPredictionCounter2(),
-                SizedBox(height: 11.v),
-                _buildPredictionCounter3(),
-              ],
-            ),
-          ),
-          Container(
-            height: 156.v,
-            width: 5.h,
-            margin: EdgeInsets.only(left: 32.h),
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    height: 156.v,
-                    child: VerticalDivider(
-                      width: 3.h,
-                      thickness: 3.v,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SizedBox(
-                    height: 32.v,
-                    child: VerticalDivider(
-                      width: 5.h,
-                      thickness: 5.v,
-                      color: appTheme.blueGray400,
-                      indent: 8.h,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+            // Return the CustomFloodInfoTile widget using extracted data
+            return Padding(
+              padding: const EdgeInsets.only(left: 10.0,right: 10,top: 10),
+              child: CustomFloodInfoTile(
+                district: district,
+                date: date,
+                isFlooded: isFlooded,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
