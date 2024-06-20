@@ -3,8 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'widgets/home_item_widget.dart';
 import 'models/home_item_model.dart';
-import 'package:aquarisk/widgets/custom_text_form_field.dart';
-import 'package:aquarisk/widgets/custom_elevated_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:aquarisk/core/app_export.dart';
 import 'controller/home_controller.dart';
@@ -24,10 +23,8 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text("Welcome"),
-          leading: null,
-
-
+          title: Center(child: Text("Welcome")),
+          automaticallyImplyLeading: false,
         ),
         body: Container(
           width: double.maxFinite,

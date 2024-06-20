@@ -1,5 +1,6 @@
 import 'package:aquarisk/presentation/home_page/home_page.dart';
 import 'package:aquarisk/presentation/predict_flood_page/predict_flood_page.dart';
+import 'package:aquarisk/presentation/setting_page/setting_page.dart';
 import 'package:aquarisk/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:aquarisk/core/app_export.dart';
@@ -40,7 +41,7 @@ class HomeContainerScreen extends GetWidget<HomeContainerController> {
       case BottomBarEnum.Notification:
         return "/";
       case BottomBarEnum.Settings:
-        return "/";
+        return AppRoutes.settingScreen;
       default:
         return "/";
     }
@@ -53,6 +54,8 @@ class HomeContainerScreen extends GetWidget<HomeContainerController> {
         return HomePage();
       case AppRoutes.predictFloodPage:
         return PredictFloodPage();
+      case AppRoutes.settingScreen:
+        return SettingPage();
       default:
         return DefaultWidget();
     }

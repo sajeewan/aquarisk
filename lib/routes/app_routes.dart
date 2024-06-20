@@ -1,3 +1,4 @@
+import 'package:aquarisk/presentation/setting_page/setting_page.dart';
 import 'package:aquarisk/presentation/splash_screen/binding/splash_binding.dart';
 import 'package:get/get.dart';
 import '../presentation/home_container_screen/home_container_screen.dart';
@@ -8,6 +9,7 @@ import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 import '../presentation/app_navigation_screen/binding/app_navigation_binding.dart';
 import '../presentation/login_screen/binding/login_binding.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/setting_page/binding/setting_binding.dart';
 import '../presentation/signup_screen/binding/signup_binding.dart';
 import '../presentation/signup_screen/signup_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
@@ -30,6 +32,8 @@ class AppRoutes {
   static const String splashScreen = '/splash_screen';
 
   static const String signupScreen = '/signup_screen';
+
+  static const String settingScreen = '/setting_page';
 
   static List<GetPage> pages = [
     GetPage(
@@ -81,6 +85,13 @@ class AppRoutes {
       page: () => SplashScreen(),
       bindings: [
         SplashBinding(),
+      ],
+    ),
+    GetPage(
+      name: settingScreen,
+      page: () => SettingPage(),
+      bindings: [
+        SettingBinding(),
       ],
     )
   ];
