@@ -77,6 +77,7 @@ class CustomBottomBar extends StatelessWidget {
                 ],
               ),
               activeIcon: Container(
+                width: 60.v,
                 decoration: AppDecoration.fillPrimary.copyWith(
                   borderRadius: BorderRadiusStyle.roundedBorder12,
                 ),
@@ -147,21 +148,28 @@ class BottomMenuModel {
 class DefaultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffffffff),
-      padding: EdgeInsets.all(10),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Please replace the respective Widget here',
-              style: TextStyle(
-                fontSize: 18,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Center(child: Text("Notifications",style: TextStyle(color: Colors.white),)),
+        automaticallyImplyLeading: false,
+      ),
+      body: Container(
+        color: Color(0xffffffff),
+        padding: EdgeInsets.all(10),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'No Notification Available',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

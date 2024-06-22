@@ -1,4 +1,5 @@
 import 'package:aquarisk/presentation/home_page/widgets/list_item_widget.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'widgets/home_item_widget.dart';
@@ -23,7 +24,8 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Center(child: Text("Welcome")),
+          backgroundColor: Theme.of(context).primaryColor,
+          title: Center(child: Text("Welcome",style: TextStyle(color: Colors.white),)),
           automaticallyImplyLeading: false,
         ),
         body: Container(
@@ -35,17 +37,30 @@ class HomePage extends StatelessWidget {
 
                 SizedBox(height: 7.v),
                 _buildHome(),
-                SizedBox(height: 45.v),
+                SizedBox(height: 10.v),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: EdgeInsets.only(left: 29.h),
-                    child: Text(
-                      "msg_previous_predications".tr,
-                      style: CustomTextStyles.titleMediumOnPrimary,
+                    child: Column(
+                      children: [
+                        Text(
+                          "msg_previous_predications".tr,
+                          style: CustomTextStyles.titleMediumOnPrimary18,
+                        ),
+                        SizedBox(height: 8),
+                        Container(
+                          width: 200.h, // Example width, adjust as needed
+                          height: 2,
+                          color: Colors.blue, // Example primary color
+                        ),
+
+                      ],
                     ),
+
                   ),
                 ),
+
                 _buildPredictionList()
 
               ],
@@ -61,29 +76,27 @@ class HomePage extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: SizedBox(
-        height: 121.v,
-        child: Obx(
-          () => ListView.separated(
-            padding: EdgeInsets.only(left: 29.h),
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (
-              context,
-              index,
-            ) {
-              return SizedBox(
-                width: 22.h,
+        height: 150.h,
+        child: Obx(() {
+          final homeItems = controller.homeModelObj.value.homeItemList.value;
+          return CarouselSlider(
+            options: CarouselOptions(
+              height: 150,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 5),
+              onPageChanged: (index, reason) {
+                controller.currentIndex.value = index;
+              },
+            ),
+            items: homeItems.map((item) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return HomeItemWidget(item);
+                },
               );
-            },
-            itemCount: controller.homeModelObj.value.homeItemList.value.length,
-            itemBuilder: (context, index) {
-              HomeItemModel model =
-                  controller.homeModelObj.value.homeItemList.value[index];
-              return HomeItemWidget(
-                model,
-              );
-            },
-          ),
-        ),
+            }).toList(),
+          );
+        }),
       ),
     );
   }

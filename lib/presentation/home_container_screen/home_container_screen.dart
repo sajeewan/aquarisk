@@ -20,7 +20,7 @@ class HomeContainerScreen extends GetWidget<HomeContainerController> {
                     page: () => getCurrentPage(routeSetting.name!),
                     transition: Transition.noTransition)),
             bottomNavigationBar: Padding(
-                padding: EdgeInsets.only(left: 27.h, right: 37.h),
+                padding: EdgeInsets.only(left: 10.h, right: 10.h),
                 child: _buildBottomBar())));
   }
 
