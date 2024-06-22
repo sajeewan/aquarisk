@@ -6,16 +6,20 @@ import 'home_item_model.dart';
 class HomeModel {
   Rx<List<HomeItemModel>> homeItemList = Rx([
     HomeItemModel(
-        placeOne: ImageConstant.imgRectangle3.obs,
+        placeOne: ImageConstant.flood1.obs,
         placeCounter: "Place 1".obs,
         address: "Address".obs),
     HomeItemModel(
-        placeOne: ImageConstant.imgRectangle3121x241.obs,
+        placeOne: ImageConstant.flood2.obs,
         placeCounter: "Place 2".obs,
         address: "Address".obs),
     HomeItemModel(
-        placeOne: ImageConstant.imgRectangle3.obs,
+        placeOne: ImageConstant.flood3.obs,
         placeCounter: "Place 1".obs,
+        address: "Address".obs),
+    HomeItemModel(
+        placeOne: ImageConstant.flood4.obs,
+        placeCounter: "Place 2".obs,
         address: "Address".obs),
   ]);
 }

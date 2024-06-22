@@ -21,12 +21,12 @@ class CustomFloodInfoTile extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.lightBlueAccent,
+          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5), // Shadow color
-              spreadRadius: 5, // Spread radius
-              blurRadius: 7, // Blur radius
+              color: Colors.grey.withOpacity(0.2), // Shadow color
+              spreadRadius: 2, // Spread radius
+              blurRadius: 3, // Blur radius
               offset: Offset(0, 3), // Offset from the box
             ),
           ],
@@ -59,7 +59,7 @@ class CustomFloodInfoTile extends StatelessWidget {
                           style: TextStyle(
                               letterSpacing: 0.24,
                               fontSize: 20,
-                              color: Colors.white,
+                              color: Colors.blue,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -71,8 +71,8 @@ class CustomFloodInfoTile extends StatelessWidget {
                           style: TextStyle(
                             letterSpacing: 0.24,
                             fontSize: 18,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.white70,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
@@ -88,10 +88,10 @@ class CustomFloodInfoTile extends StatelessWidget {
                         color: isFlooded ? Colors.green :Colors.redAccent,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5), // Shadow color
-                            spreadRadius: 5, // Spread radius
-                            blurRadius: 7, // Blur radius
-                            offset: Offset(0, 3), // Offset from the box
+                            color: Colors.grey.withOpacity(0.2), // Shadow color
+                            spreadRadius: 2, // Spread radius
+                            blurRadius: 2, // Blur radius
+                            offset: Offset(0, 2), // Offset from the box
                           ),
                         ],
                       ),

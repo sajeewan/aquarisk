@@ -66,6 +66,14 @@ class PredictFloodController extends GetxController {
     }
   }
 
+  double _convertMetersToFeet(double meters) {
+    return meters * 3.28084;
+  }
+
+  double _convertMillimetersToInches(double millimeters) {
+    return millimeters * 0.0393701;
+  }
+
   void predictFlood() {
     if (!_isModelLoaded) {
       print('TensorFlow Lite model is not loaded.');
@@ -77,7 +85,11 @@ class PredictFloodController extends GetxController {
       double rainFall = double.parse(rainFallController.text);
       double temperature = double.parse(temperatureController.text);
 
-      List<double> inputData = [waterLevel, rainFall, temperature];
+
+      double waterLevelInFeet = _convertMetersToFeet(waterLevel);
+      double rainFallInInches = _convertMillimetersToInches(rainFall);
+
+      List<double> inputData = [waterLevelInFeet, rainFallInInches, temperature];
       List<double> scaledInputData = _scaleInputData(inputData);
 
       var inputTensor = Float32List.fromList(scaledInputData);

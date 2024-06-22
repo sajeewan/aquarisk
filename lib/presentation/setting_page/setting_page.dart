@@ -14,7 +14,8 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Settings')),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Center(child: Text("Settings",style: TextStyle(color: Colors.white),)),
         automaticallyImplyLeading: false,
       ),
       body: Obx(() {
@@ -41,7 +42,7 @@ class SettingPage extends StatelessWidget {
                 Container(
                   child: Center(
                     child: Text(
-                      "Dhasa",
+                      settingController.userModel.value!.name.toString(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
@@ -59,7 +60,7 @@ class SettingPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                           subtitle: Text(
-                            "Test@gmail.com",
+                            settingController.userModel.value!.email.toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
@@ -71,7 +72,7 @@ class SettingPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                           subtitle: Text(
-                            "Badulla",
+                            settingController.userModel.value!.district.toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),
@@ -83,7 +84,7 @@ class SettingPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                           subtitle: Text(
-                            "0775441410",
+                            settingController.userModel.value!.phoneNumber.toString(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
                           ),

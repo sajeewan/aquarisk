@@ -19,12 +19,12 @@ class HomeItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 241.h,
+      width: 300.h,
       child: Align(
         alignment: Alignment.centerRight,
         child: SizedBox(
           height: 121.v,
-          width: 241.h,
+          width: 290.h,
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -32,7 +32,7 @@ class HomeItemWidget extends StatelessWidget {
                 () => CustomImageView(
                   imagePath: homeItemModelObj.placeOne!.value,
                   height: 121.v,
-                  width: 241.h,
+                  width: 300.h,
                   radius: BorderRadius.circular(
                     16.h,
                   ),
@@ -49,25 +49,25 @@ class HomeItemWidget extends StatelessWidget {
                   decoration: AppDecoration.gradientBlueGrayToBlueGray.copyWith(
                     borderRadius: BorderRadiusStyle.customBorderBL16,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 28.v),
-                      Obx(
-                        () => Text(
-                          homeItemModelObj.placeCounter!.value,
-                          style: CustomTextStyles.titleMediumSourceSansPro,
-                        ),
-                      ),
-                      Obx(
-                        () => Text(
-                          homeItemModelObj.address!.value,
-                          style: CustomTextStyles.bodySmallWhiteA700,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // child: Column(
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     SizedBox(height: 28.v),
+                  //     Obx(
+                  //       () => Text(
+                  //         homeItemModelObj.placeCounter!.value,
+                  //         style: CustomTextStyles.titleMediumSourceSansPro,
+                  //       ),
+                  //     ),
+                  //     Obx(
+                  //       () => Text(
+                  //         homeItemModelObj.address!.value,
+                  //         style: CustomTextStyles.bodySmallWhiteA700,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ),
               ),
             ],

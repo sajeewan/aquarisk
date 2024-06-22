@@ -19,6 +19,13 @@ class HomeController extends GetxController {
 
   Rx<HomeModel> homeModelObj;
 
+  var currentIndex = 0.obs;
+
+
+  void updateImage() {
+    currentIndex.value = (currentIndex.value + 1) % homeModelObj.value.homeItemList.value.length;
+  }
+
   @override
   void onClose() {
     super.onClose();

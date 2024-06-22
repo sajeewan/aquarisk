@@ -17,10 +17,16 @@ dependencies:
   cloud_firestore: ^4.16.0
   top_snackbar_flutter: ^3.1.0
   tflite_flutter: ^0.10.4
+  carousel_slider: ^4.2.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies: 
   flutter_test: 
     sdk: flutter
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
 flutter: 
   uses-material-design: true
   assets: 

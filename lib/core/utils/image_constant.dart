@@ -26,4 +26,10 @@ class ImageConstant {
   static String imageNotFound = 'assets/images/image_not_found.png';
 
   static String imgIconEye = '$imagePath/img_icon_eye.svg';
+
+  static String flood1 = '$imagePath/flood.jpg';
+  static String flood2 = '$imagePath/flood1.jpg';
+  static String flood3 = '$imagePath/flood3.jpeg';
+  static String flood4 = '$imagePath/high_water.jpg';
+
 }
