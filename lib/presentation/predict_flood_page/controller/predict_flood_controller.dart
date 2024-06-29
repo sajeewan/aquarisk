@@ -23,7 +23,7 @@ class PredictFloodController extends GetxController {
 
   SelectionPopupModel? selectedDropDownValue;
 
-  bool result =false;
+  bool result = false;
 
   Interpreter? _interpreter;
   bool _isModelLoaded = false;
@@ -85,11 +85,23 @@ class PredictFloodController extends GetxController {
       double rainFall = double.parse(rainFallController.text);
       double temperature = double.parse(temperatureController.text);
 
-
       double waterLevelInFeet = _convertMetersToFeet(waterLevel);
       double rainFallInInches = _convertMillimetersToInches(rainFall);
 
-      List<double> inputData = [waterLevelInFeet, rainFallInInches, temperature];
+      List<double> inputData = [
+        waterLevelInFeet,
+        rainFallInInches,
+        temperature
+      ];
+
+      if (district == 'Ratnapura') {
+        inputData.add(1);
+      } else if (district == 'Kalutara') {
+        inputData.add(2);
+      } else {
+        inputData.add(0);
+      }
+
       List<double> scaledInputData = _scaleInputData(inputData);
 
       var inputTensor = Float32List.fromList(scaledInputData);
@@ -100,15 +112,16 @@ class PredictFloodController extends GetxController {
 
       double prediction = outputTensor[0][0];
 
-      result = prediction >= 0.8 ? false : true;
+      result = prediction >= 0.9 ? true : false;
+      print(prediction);
 
-print(district);
-      Get.toNamed(AppRoutes.floodWarningScreen,arguments: {
+
+      Get.toNamed(AppRoutes.floodWarningScreen, arguments: {
         'district': district,
-        'waterLevel' : waterLevelController.text,
-        'rainfall' : rainFallController.text,
-        'temperature' :temperatureController.text,
-        'prediction' : result,
+        'waterLevel': waterLevelController.text,
+        'rainfall': rainFallController.text,
+        'temperature': temperatureController.text,
+        'prediction': result,
       });
     } catch (e) {
       print('Error performing prediction: $e');
