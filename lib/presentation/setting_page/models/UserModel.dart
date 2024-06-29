@@ -4,8 +4,9 @@ class UserModel {
   String? district;
   String? email;
   String? phoneNumber;
+  String? role;
 
-  UserModel({this.uid, this.name, this.district, this.email, this.phoneNumber});
+  UserModel({this.uid, this.name, this.district, this.email, this.phoneNumber, this.role});
 
   factory UserModel.fromMap(Map<String, dynamic> data) {
     return UserModel(
@@ -14,6 +15,7 @@ class UserModel {
       district: data['district'],
       email: data['email'],
       phoneNumber: data['phoneNumber'],
+      role: data['role']
     );
   }
 
@@ -24,6 +26,7 @@ class UserModel {
       'district': district,
       'email': email,
       'phoneNumber': phoneNumber,
+      'role' : role
     };
   }
 }

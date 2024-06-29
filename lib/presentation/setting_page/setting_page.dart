@@ -2,12 +2,17 @@ import 'package:aquarisk/core/app_export.dart';
 import 'package:aquarisk/presentation/setting_page/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
   SettingPage({Key? key})
       : super(
           key: key,
         );
 
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
   SettingController settingController = Get.put(SettingController());
 
   @override
@@ -42,10 +47,12 @@ class SettingPage extends StatelessWidget {
                 Container(
                   child: Center(
                     child: Text(
-                      settingController.userModel.value!.name.toString(),
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      settingController.userModel.value!.role != null && settingController.userModel.value!.role!.isNotEmpty
+                          ? '${settingController.userModel.value!.name} (${settingController.userModel.value!.role!})'
+                          : settingController.userModel.value!.name!,
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                     ),
+
                   ),
                 ),
                 Padding(
